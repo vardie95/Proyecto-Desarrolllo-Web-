@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const pool = require('../database');
+const pool = require('../database.js');
+const mysql = require('mysql');
 
 
 
 
 router.get('/', (req, res, next) => {
   res.render('LogIn');
-
 });
 
 
@@ -19,26 +19,31 @@ router.get('/register', (req, res, next) => {
 router.post('/registerUser',async(req,res,next) => {
 
 
+	const {inputUserName,inputName,inputLastName1, inputLastName2, inputEmail, inputPassword,inputPasswordConfirm} = req.body;
 
+	let insertQuery = 'INSERT INTO `RXWuaQvtL6`.`Users`(`username`, `name`, `lastname1`, `lastname2`, `email`, `password`) VALUES (?,?,?,?,?,?)';
+	let selectQuery = 'Select username from `RXWuaQvtL6`.`Users` where username = ?';
 
-	const {inputUserName,inputName,inputLastName1, inputLastName2, inputEmail, inputPassword} = req.body;
-	console.log(req.body.inputName);
-
-	// var sql = "INSERT INTO RXWuaQvtL6`.`example`(`id`, `name`) VALUES (?,?)";
-	//var sql = "INSERT INTO `RXWuaQvtL6`.`Users`(`username`, `name`, `lastname1`, `lastname2`, `email`, `password`) VALUES ('diego','diego','diego','diego','diego','diego')";
-	pool.query("INSERT INTO RXWuaQvtL6`.`example`(`id`, `name`) VALUES (?,?)",req.body.inputUserName,req.body.name,function(err){
-		if(err){
-
-			console.log(err);
-		}else
-			console.log("Agregardo exitosamente");
-
-
-	}
-
-
-
-		);
+	if(inputPassword!='' && (inputPassword==inputPasswordConfirm)){
+		let sqlQuery = mysql.format(selectQuery,[inputUserName]);
+	    pool.query(sqlQuery,(err, response) => {
+	    	if(!(response[0]>0)){
+	    		//Investigar bcrypt o preguntar que usar para encriptar
+	    		sqlQuery = mysql.format(insertQuery,[inputUserName,inputName,inputLastName1,inputLastName2,inputEmail,inputPassword]);
+	    		pool.query(sqlQuery,(err, response) => {
+	    			//hacer validación
+	    			res.redirect("/");
+	    			let sqlQuery = mysql.format(selectQuery,[inputUserName]);
+	    			pool.query(sqlQuery,(err, response) => {
+	    				console.log(response[0]);
+	    			});
+	    		});
+	    	}
+		});
+	}else{
+		//hacer mensaje, investigar
+		console.log("Contraseña no coincide o esta en blanco");
+	};
 
 });
 

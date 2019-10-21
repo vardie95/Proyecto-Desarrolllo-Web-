@@ -1,9 +1,7 @@
 const mysql = require('mysql');
-const { promisify }= require('util');
+const util = require('util');
 
-
-
-  var pool = mysql.createPool( {
+var pool = mysql.createPool( {
   		adapter: 'msql',
         connectionLimit: 10,
         host: 'remotemysql.com',
@@ -13,8 +11,6 @@ const { promisify }= require('util');
 		port: '3306'
     
 });
-
-
 
 
 
@@ -38,7 +34,7 @@ pool.getConnection((err, connection) => {
 });
 
 // Promisify Pool Querys
-pool.query = promisify(pool.query);
+pool.query = util.promisify(pool.query);
 
 module.exports = pool;
 
