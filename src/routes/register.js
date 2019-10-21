@@ -19,7 +19,7 @@ router.get('/register', (req, res, next) => {
 router.post('/registerUser',async(req,res,next) => {
 
 
-	const {inputUserName,inputName,inputLastName1, inputLastName2, inputEmail, inputPassword,inputPasswordConfirm} = req.body;
+	var {inputUserName,inputName,inputLastName1, inputLastName2, inputEmail, inputPassword,inputPasswordConfirm} = req.body;
 
 	let insertQuery = 'INSERT INTO `RXWuaQvtL6`.`Users`(`username`, `name`, `lastname1`, `lastname2`, `email`, `password`) VALUES (?,?,?,?,?,?)';
 	let selectQuery = 'Select username from `RXWuaQvtL6`.`Users` where username = ?';
@@ -27,7 +27,7 @@ router.post('/registerUser',async(req,res,next) => {
 	if(inputPassword!='' && (inputPassword==inputPasswordConfirm)){
 		let sqlQuery = mysql.format(selectQuery,[inputUserName]);
 	    pool.query(sqlQuery,(err, response) => {
-	    	if(!(response[0]>0)){
+	    	if(response[0]==''){
 	    		//Investigar bcrypt o preguntar que usar para encriptar
 	    		sqlQuery = mysql.format(insertQuery,[inputUserName,inputName,inputLastName1,inputLastName2,inputEmail,inputPassword]);
 	    		pool.query(sqlQuery,(err, response) => {
@@ -38,6 +38,9 @@ router.post('/registerUser',async(req,res,next) => {
 	    				console.log(response[0]);
 	    			});
 	    		});
+	    	}else{
+	    		console.log(response);
+	    		console.log("El usuario ya existe");
 	    	}
 		});
 	}else{
