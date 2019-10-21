@@ -1,13 +1,18 @@
 const router = require('express').Router();
+const db = require('../database');
+const express = require('express');
+
 
 router.get('/', (req, res, next) => {
+  
   res.render('LogIn');
 
 });
 
-router.post('/main', (req, res, next) => {
+router.post('/main', function(req, res, next) {
+  console.log(req.body);
   res.render('main');
-
+  
 
 });
 
