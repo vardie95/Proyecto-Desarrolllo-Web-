@@ -27,7 +27,7 @@ router.post('/registerUser',async(req,res,next) => {
 	if(inputPassword!='' && (inputPassword==inputPasswordConfirm)){
 		let sqlQuery = mysql.format(selectQuery,[inputUserName]);
 	    pool.query(sqlQuery,(err, response) => {
-	    	if(response[0]==''){
+	    	if(!response.length){
 	    		//Investigar bcrypt o preguntar que usar para encriptar
 	    		sqlQuery = mysql.format(insertQuery,[inputUserName,inputName,inputLastName1,inputLastName2,inputEmail,inputPassword]);
 	    		pool.query(sqlQuery,(err, response) => {
