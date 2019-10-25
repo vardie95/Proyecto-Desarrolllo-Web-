@@ -50,10 +50,23 @@ router.post('/validateLogIn',(req, res, next) => {
 
 
 
+
 router.get('/register', (req, res, next) => {
   res.render('register');
   
 
 });
+
+router.get('/ModifyUser', (req, res, next) => {
+	res.render('users/modifyUser');
+	
+  
+  })
+
+  router.get('/ModifyPassword', (req, res, next) => {
+	res.render('users/modifyPassword');
+	
+  
+  })
 
 module.exports = router;
