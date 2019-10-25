@@ -21,7 +21,7 @@ router.post('/registerUser',async(req,res,next) => {
 
 	var {inputUserName,inputName,inputLastName1, inputLastName2, inputEmail, inputPassword,inputPasswordConfirm} = req.body;
 
-	let insertQuery = 'INSERT INTO `RXWuaQvtL6`.`Users`(`username`, `name`, `lastname1`, `lastname2`, `email`, `password`) VALUES (?,?,?,?,?,?)';
+	let insertQuery = 'INSERT INTO `RXWuaQvtL6`.`Users`(`username`, `name`, `lastname1`, `lastname2`, `email`, `password`,`Active`) VALUES (?,?,?,?,?,?,?)';
 	let selectQuery = 'Select username from `RXWuaQvtL6`.`Users` where username = ?';
 
 	if(inputPassword!='' && (inputPassword==inputPasswordConfirm)){
@@ -29,7 +29,7 @@ router.post('/registerUser',async(req,res,next) => {
 	    pool.query(sqlQuery,(err, response) => {
 	    	if(!response.length){
 	    		//Investigar bcrypt o preguntar que usar para encriptar
-	    		sqlQuery = mysql.format(insertQuery,[inputUserName,inputName,inputLastName1,inputLastName2,inputEmail,inputPassword]);
+	    		sqlQuery = mysql.format(insertQuery,[inputUserName,inputName,inputLastName1,inputLastName2,inputEmail,inputPassword,1]);
 	    		pool.query(sqlQuery,(err, response) => {
 	    			//hacer validación
 	    			res.redirect("/");

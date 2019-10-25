@@ -30,9 +30,9 @@
     <br>
     <h3 class="login-heading mb-4" style="text-align: center; ">Modificar  usuario</h3>
      <div class="container" style="width: 500px">
-    <form action="" method="POST" >
+    <form action="/modifyUser" method="POST" >
           <div class="form-label-group" >
-              <input type="text" name="inputName" id = "inputName" class="form-control" placeholder="Nombre" autofocus required>
+              <input type="text" name="inputName" id = "inputName" class="form-control" placeholder="Nombre" value= {{response.Name}}   autofocus required>
               <label for="inputName">Nombre</label>
           </div>
           <div class="form-label-group" >
@@ -42,11 +42,6 @@
           <div class="form-label-group" >
               <input type="text" name="inputLastName2" id="inputLastName2" class="form-control" placeholder="Apellido 2" required>
               <label for="inputLastName2">Apellido 2</label>
-          </div>
-  
-          <div class="form-label-group" >
-              <input type="text" name="inputUserName" id="inputUserName" class="form-control" placeholder="Usuario"  required>
-              <label for="inputUserName">Usuario</label>
           </div>
           <div class="form-label-group" >
               <input type="text" name="inputEmail" id="inputEmail" class="form-control" placeholder="Correo" required>
@@ -67,6 +62,10 @@
       $("#nav-placeholder").load("nav.ejs");
     });
     </script>
+  
+    
+  
+  
 
 </body>
 </html>

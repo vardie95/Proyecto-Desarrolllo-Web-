@@ -25,6 +25,7 @@ app.use(express.static(__dirname + '/public'));
 // routes
 app.use(require('./routes/index'));
 app.use(require('./routes/register'));
+app.use(require('./routes/user'));
 
 // starting the server
 app.listen(app.get('port'), () => {
