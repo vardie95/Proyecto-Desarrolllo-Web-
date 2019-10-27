@@ -55,7 +55,7 @@ COMMIT;
 --
 
 CREATE TABLE `Company`(
-  `idCompany` int COLLATE utf8_unicode_ci NOT NULL,
+  `idCompany` int COLLATE utf8_unicode_ci NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `phone` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL,
   `sourcezone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
