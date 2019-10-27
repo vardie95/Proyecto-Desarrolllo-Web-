@@ -8,6 +8,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
   <title></title>
 
 </head>
@@ -15,6 +18,10 @@
 
 
 <body>
+
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""></script>
   
     <div id="nav-placeholder">
 
@@ -68,22 +75,26 @@
         </div>
           <div>
                 <h4 class="login-heading mb-2" style="text-align: center;">Ruta del Viaje</h4>
-                <div class="form-label-group" >
-                    <input type="text" name="inputDireccionMarcador" id="inputDireccionMarcador" class="form-control" placeholder="Marcador" required>
-                    <label for="inputDireccionMarcador">Mapa con Ruta</label>
+                <div id="mapid" style="height: 400px">
+                    <!--<input type="text" name="inputDireccionMarcador" id="inputDireccionMarcador" class="form-control" placeholder="Marcador" required>
+                    <label for="inputDireccionMarcador">Mapa con Ruta</label>-->
                 </div>
+                
           </div>
 
           <h5 class="login-heading mb-4" style="text-align: center;">Reportes</h5>
+
 
   
           <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Guardar</button>
               
       </form>
   
+      
       </div>
   </div>
-
+  
+  <script src="map.js"></script>
  <script>
     $(function(){
       $("#nav-placeholder").load("nav.ejs");
