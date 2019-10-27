@@ -48,6 +48,52 @@ ALTER TABLE `Users`
   ADD PRIMARY KEY (`username`);
 COMMIT;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Company`
+--
+
+CREATE TABLE `Company`(
+  `idCompany` int COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL,
+  `sourcezone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `destinyzone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `anomalycontact` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `addresssigns` VARCHAR(255) COLLATE utf8_unicode_ci Not NULL,
+  `latitude` VARCHAR(255) COLLATE utf8_unicode_ci Not NULL,
+  `longitude` VARCHAR(255) COLLATE utf8_unicode_ci Not NULL,
+  `daysattention` VARCHAR(255) COLLATE utf8_unicode_ci Not NULL, -- serializado
+  `openingtime` VARCHAR(55) COLLATE utf8_unicode_ci Not NULL,
+  `closingtime` VARCHAR(255) COLLATE utf8_unicode_ci Not NULL,
+  PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Route`
+--
+
+CREATE TABLE `Route`(
+  `numroute` int COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `ticketCost` VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL,
+  `durationtime` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `disability` CHAR COLLATE utf8_unicode_ci NOT NULL,
+  `frecuency` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `latitude` VARCHAR(255) COLLATE utf8_unicode_ci Not NULL, -- serializado 
+  `longitude` VARCHAR(255) COLLATE utf8_unicode_ci Not NULL, -- serializado
+  `starttime` VARCHAR(55) COLLATE utf8_unicode_ci Not NULL,
+  `finishtime` VARCHAR(255) COLLATE utf8_unicode_ci Not NULL
+  `idCompany` int,
+  PRIMARY KEY (`numroute`),
+  CONSTRAINT FK_CompanyRoute FOREIGN KEY (`idCompany`)
+  REFERENCES Company(`idCompany`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
