@@ -44,7 +44,7 @@
                 </select>
         </div>
           <div class="form-label-group" >
-              <input type="text" name="inputName" id = "inputName" class="form-control" placeholder="Nombre" autofocus readonly>
+              <input type="text" name="inputName" id = "inputName" class="form-control" placeholder="Nombre" autofocus>
               <label for="inputName">Nombre Nuevo</label>
           </div>
           <div class="form-label-group" >
@@ -68,9 +68,11 @@
           </div>
           <div>
                 <h4 class="login-heading mb-2" style="text-align: center;">Dirección de la Terminal u Oficina</h4>
-                <div class="form-label-group" >
-                    <input type="text" name="inputDireccionMarcador" id="inputDireccionMarcador" class="form-control" placeholder="Marcador" required>
-                    <label for="inputDireccionMarcador">Marcador</label>
+                <h5 class="login-heading mb-4">Ubicación en el mapa</h5>
+                <div class="form-label-group" style="background-color: rgb(100,100,100);  ">
+                  <div id="mapid" class="container-fluid" style="height: 200px;  ">
+            
+                  </div>
                 </div>
                 <div class="form-label-group">
                     <input type="text" name="inputDireccionSenna" id="inputDireccionSenna" class="form-control" placeholder="Dirección" required>
@@ -95,23 +97,16 @@
                 <input type="time" name="inputHoraApertura" id="inputHoraApertura" class="form-control" placeholder="Apertura" required>
                 <label for="inputHoraApertura">Hora Apertura</label>
             </div>
-            <div class=>
+            <div class="form-label-group">
                     <input type="time" name="inputHoraCierre" id="inputHoraCierre" class="form-control" placeholder="Cierre" required>
                     <label for="inputHoraCierre">Hora Cierre</label>
                 </div>
           </div>
-          
+          <h5 class="login-heading mb-4" style="text-align: center;">Reportes</h5>
             <div class="form-label-group">
                     <input type="text" name="inputContactoAnomalias" id="inputContactoAnomalias" class="form-control" placeholder="Contacto Anomalías" required>
                     <label for="inputContactoAnomalias">Contacto Anomalías</label>
             </div>
-            <h5 class="login-heading mb-4" style="text-align: center;">Ubicación</h5>
-            <div class="form-label-group" style="background-color: rgb(100,100,100);  ">
-                <div id="mapid" class="container-fluid" style="height: 200px;  ">
-            
-                </div>
-            </div>
-            <br>
             <div>
           <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Guardar</button>
         </div> 
