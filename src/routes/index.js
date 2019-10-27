@@ -82,16 +82,11 @@ router.get('/ModifyUser', (req, res, next) => {
 		
 
 	});
-
-
-
-	
   
   })
 
   router.get('/ModifyPassword', (req, res, next) => {
 	res.render('users/modifyPassword');
-	
   
   })
 

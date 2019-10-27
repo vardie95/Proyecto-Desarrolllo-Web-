@@ -10,4 +10,7 @@ router.get('/RegisterCompany', (req, res, next) => {
 router.get('/ModifyCompany', (req, res, next) => {
     res.render('companies/modifyCompany');
   });
+
+
+  
 module.exports = router;
