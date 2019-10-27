@@ -31,9 +31,14 @@
     <h3 class="login-heading mb-4" style="text-align: center; ">Modificar Empresa</h3>
      <div class="container" style="width: 500px">
     <form action="/modifyCompany" method="POST" >
+        <div class="form-group" >
+                <label for="inputCompany">Seleccione la empresa</label>
+                <select name="inputCompany" id="inputCompany" class="form-control">
+                </select>
+        </div>
           <div class="form-label-group" >
               <input type="text" name="inputName" id = "inputName" class="form-control" placeholder="Nombre" autofocus readonly>
-              <label for="inputName">Nombre</label>
+              <label for="inputName">Nombre Nuevo</label>
           </div>
           <div class="form-label-group" >
               <input type="text" name="inputNumTelefono" id="inputNumTelefono" class="form-control" placeholder="Número de Teléfono" required>
@@ -67,7 +72,8 @@
           </div>
           <div>
             <h4 class="login-heading mb-2" style="text-align: center;">Horario de Atención</h4> 
-            <div class="form-label-group">
+            <div class="form-group">
+                <label for="inputDiasSemana">Seleccione los días</label>
                 <select name="inputDiasSemana[]" class="form-control" multiple>
                     <option>Lunes</option>
                     <option>Martes</option>
