@@ -1,9 +1,15 @@
 
 
+var coord ;
+var lat ;
+var lng ;
+
+
 var mymap = L.map('mapid', {zoomControl:false} ).setView([9.934739, -84.087502], 12);
 L.control.zoom({
     position:'topright'
 }).addTo(mymap);
+
 
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -14,4 +20,20 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     
 }).addTo(mymap);
 
+async function getCoordinates(){
 
+	return coord; 
+}
+
+
+
+mymap.on('click', function(e){
+	var marker;
+	coord = e.latlng;
+	lat = coord.lat;
+	lng = coord.lng;
+	marker = new L.marker(e.latlng).addTo(mymap);
+	
+
+
+});
