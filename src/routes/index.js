@@ -2,24 +2,24 @@ const router = require('express').Router();
 const pool = require('../database');
 const mysql = require('mysql');
 const express = require('express');
+const session = require('express-session');
 var userName = '';
 
 router.get('/', (req, res, next) => {
-  
-  res.render('LogIn');
+	
+	if(!req.session.userid){
+		res.render('LogIn');
 
+	}else{
+		res.render('main');
+	}
+	
 });
 
-router.get('/main',(req, res, next)=>{
-	res.render('main');
-
-});
 
 router.post('/validateLogIn',(req, res, next) => {
 
   var {inputUser,inputPassword} = req.body;
-
-	
 	let selectQuery = 'Select username from `RXWuaQvtL6`.`Users` where username = ?';
 	let validatePassQuery =  'Select password, Active from  `RXWuaQvtL6`.`Users` where username = ? ';
 
@@ -37,9 +37,8 @@ router.post('/validateLogIn',(req, res, next) => {
 	    			}else{
 
 						if(response[0].password == inputPassword){
-							res.redirect("/main");
-
-
+							req.session.userId = userName;
+							res.render("main");
 						}
 						else{
 
@@ -57,7 +56,11 @@ router.post('/validateLogIn',(req, res, next) => {
 
 });
 
+router.get('/main',(req, res, next)=>{
+	res.render('main');
 
+	
+});
 
 
 router.get('/register', (req, res, next) => {
@@ -67,7 +70,7 @@ router.get('/register', (req, res, next) => {
 });
 
 router.get('/ModifyUser', (req, res, next) => {
-	console.log(userName);
+	
 	
 	let selectQuery = 'Select name,lastname1,lastname2,email from `RXWuaQvtL6`.`Users` where username = ?';
 	let sqlQuery = mysql.format(selectQuery,[userName]);
@@ -76,7 +79,13 @@ router.get('/ModifyUser', (req, res, next) => {
 			console.log(err);
 
 		}else{
-			res.render('users/modifyUser',{response: response[0]});
+			res.header(req.session.userId);
+			res.render('users/modifyUser',{
+				name:response[0].name,
+				lastname1: response[0].lastname1,
+				lastname2: response[0].lastname2,
+				email: response[0].email
+			});
 			
 		}
 		

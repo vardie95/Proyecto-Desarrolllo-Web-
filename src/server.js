@@ -7,6 +7,8 @@ var session = require('express-session');
 
 const app = express();
 
+
+
 var server = http.createServer(app)
 // setttings
 app.set('port', process.env.PORT || 3000);
@@ -20,7 +22,15 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
-
+app.use(
+  session({
+    secret: "app",
+    name: "app",
+    resave: true,
+    saveUninitialized: true
+    // cookie: { maxAge: 6000 } /* 6000 ms? 6 seconds -> wut? :S */
+  })
+);
 
 // routes
 app.use(require('./routes/index'));

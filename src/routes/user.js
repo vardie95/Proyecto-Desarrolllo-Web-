@@ -1,37 +1,30 @@
 const router = require('express').Router();
 const pool = require('../database.js');
 const mysql = require('mysql');
+const session = require('express-session');
 
 
 
 
-router.get('/', (req, res, next) => {
-  res.render('LogIn');
-});
-
-
-router.get('/register', (req, res, next) => {
-  res.render('register');
-  
-
-});
 
 router.post('/ModifyUser',async(req,res,next) => {
-
-
 	var {inputName,inputLastName1, inputLastName2, inputEmail} = req.body;
 	var userN = 'vardie95';
-	
 	let selectQuery = 'UPDATE `RXWuaQvtL6`.`Users` SET  `name` = ?, `lastname1` = ?, `lastname2` = ?, `email` = ? WHERE `Users`.`username` = ?';
 		let sqlQuery = mysql.format(selectQuery,[inputName,inputLastName1,inputLastName2,inputEmail,userN]);
-		console.log(sqlQuery);
 	    pool.query(sqlQuery,(err, response) => {
 			if(err){
 				console.log(err);
 
 			}else{
 				console.log("update exitoso");
-				res.render('users/modifyUser');
+				res.render('users/modifyUser',{
+					name:inputName,
+					lastname1: inputLastName1,
+					lastname2: inputLastName2,
+					email: inputEmail
+	
+				});
 			}
 			
 
