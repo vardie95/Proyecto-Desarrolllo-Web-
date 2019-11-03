@@ -7,12 +7,9 @@ var userName = '';
 
 router.get('/', (req, res, next) => {
 	
-	if(!req.session.userid){
-		res.render('LogIn');
 
-	}else{
-		res.render('main');
-	}
+		res.render('LogIn');
+	
 	
 });
 
