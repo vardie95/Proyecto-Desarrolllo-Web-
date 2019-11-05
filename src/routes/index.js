@@ -6,11 +6,7 @@ var mensaje = '';
 
 router.get('/', (req, res, next) => {
 	
-	if(!req.session.userid){
 		res.render('LogIn', {message: mensaje});
-	}else{
-		res.render('main');
-	}
 	
 });
 
