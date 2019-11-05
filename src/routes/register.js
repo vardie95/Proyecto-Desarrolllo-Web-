@@ -2,7 +2,7 @@ const router = require('express').Router();
 const pool = require('../database.js');
 const mysql = require('mysql');
 
-
+var {mensaje,mensajePass} = '';
 
 
 router.get('/', (req, res, next) => {
@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 
 
 router.get('/register', (req, res, next) => {
-  res.render('register');
+  res.render('register', {message : mensaje, passwordMessage : mensajePass});
   
 
 });
@@ -39,13 +39,19 @@ router.post('/registerUser',async(req,res,next) => {
 	    			});
 	    		});
 	    	}else{
-	    		console.log(response);
-	    		console.log("El usuario ya existe");
+				console.log(response);
+				mensaje = 'El usuario ya existe';
+				mensajePass = '';
+				console.log("El usuario ya existe");
+				res.redirect('/register');
 	    	}
 		});
 	}else{
 		//hacer mensaje, investigar
+		mensaje = '';
+		mensajePass = 'Contraseña no coincide o esta en blanco';
 		console.log("Contraseña no coincide o esta en blanco");
+		res.redirect('/register');
 	};
 
 });

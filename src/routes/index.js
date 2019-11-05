@@ -1,15 +1,13 @@
 const router = require('express').Router();
 const pool = require('../database');
 const mysql = require('mysql');
-const express = require('express');
-const session = require('express-session');
 var userName = '';
+var mensaje = '';
 
 router.get('/', (req, res, next) => {
 	
 	if(!req.session.userid){
-		res.render('LogIn');
-
+		res.render('LogIn', {message: mensaje});
 	}else{
 		res.render('main');
 	}
@@ -26,14 +24,16 @@ router.post('/validateLogIn',(req, res, next) => {
 		let sqlQuery = mysql.format(selectQuery,[inputUser]);
 	    pool.query(sqlQuery,(err, response) => {
 	    	if(!response.length){
-	    	
-	    		console.log("El usuario no es valido ");
+				mensaje = 'El usuario no es valido ';
+				res.redirect('/');
 	    	}else{
 				userName=response[0].username;
 	    		let sqlPassword = mysql.format(validatePassQuery,[inputUser]);
 	    		pool.query(sqlPassword,(err,response)=> {
 	    			if(response[0].Active == 0){
-	    				console.log("Usuario deshabilitado");
+						mensaje = 'Usuario deshabilitado';
+						console.log("Usuario deshabilitado");
+						res.redirect('/');
 	    			}else{
 
 						if(response[0].password == inputPassword){
@@ -41,8 +41,9 @@ router.post('/validateLogIn',(req, res, next) => {
 							res.render("main");
 						}
 						else{
-
+							mensaje = 'Contraseña Incorrecta';
 							console.log("Contraseña Incorrecta");
+							res.redirect('/');
 						}
 	    				
 	    			}

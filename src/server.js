@@ -4,7 +4,6 @@ const ejs = require('ejs');
 var http = require('http');
 const bodyParser = require('body-parser');
 var session = require('express-session');
-
 const app = express();
 
 
@@ -14,7 +13,7 @@ var server = http.createServer(app)
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.set(flash());
 
 
 // middlewares
